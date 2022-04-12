@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" >
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Bootstrap Snippet: Login Form</title>
+  <link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+{% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+<div class="wrapper">
+    <form method="post" class="form-signin">
+      {% csrf_token %}
+      <h2 class="form-signin-heading">Please register</h2>
+        <p>Username</p>
+        <p><input type="text" name="username" class="form-control" maxlength="150" autofocus="" required="" id="id_username"></p>
+
+        <p>Phone</p>
+        <p><input type="text" name="phone" class="form-control" maxlength="15" id="id_phone"></p>
+
+        <p>Address</p>
+        <p><textarea name="address" class="form-control" cols="40" rows="10" id="id_address"></textarea></p>
+
+        <p>Gender</p>
+        <p><select name="gender" class="form-control" id="id_gender">
+  <option value="M" >Male</option>
+
+  <option value="F">Female</option>
+
+  <option value="MF" selected="">Unset</option>
+
+</select></p>
+
+        <p>Age</p>
+        <p><input type="number" class="form-control" name="age" min="0" id="id_age"></p>
+
+        <p>Email</p>
+        <p><input type="email" name="email" class="form-control" maxlength="254" required="" id="id_email"></p>
+
+        <p>Password</p>
+        <p><input type="password" name="password1" class="form-control" autocomplete="new-password" required="" id="id_password1" aria-autocomplete="list"></p>
+
+        <p>Password confirmation</p>
+        <p><input type="password" name="password2" class="form-control" autocomplete="new-password" required="" id="id_password2">
+        <p>Register as</p>
+        <p><select name="type_choices" class="form-control" id="id_type">
+        <option value="D" >Doctor</option>
+        <option value="P">Patient</option>
+        </select></p>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <div class="alert-danger alert">
+
+        {%for key,item in form.errors.items%}
+            <p> {{key|capfirst|cut:"1"|cut:"2"}} {{item|striptags}}</p>
+        {%endfor%}
+        </div>
+    </form>
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- partial -->
+</body>
+</html>
