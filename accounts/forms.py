@@ -14,7 +14,7 @@ class UserRegisterion(UserCreationForm):
 
     class Meta:
         model = user
-        fields = ("username", "phone", "address", "gender", "age", "email")
+        fields = ("username", "phone", "address", "gender", "age", "email", "first_name", "last_name",)
 
     def clean_phone(self):
         phone = self.cleaned_data["phone"]

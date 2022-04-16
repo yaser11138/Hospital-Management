@@ -1,0 +1,18 @@
+{% extends "login.html" %}
+{% block section %}
+<div class="wrapper">
+    <div class="form-signin">
+    <h2 class="form-signin-heading">Chose Doctor</h2>
+    {% if doctors %}
+    {% for doctor in doctors %}
+        <p> {{doctor.user.username}} ____ {{doctor.expertise}}</p>
+         <button class="btn" type="button"><a href="{% url 'doctor_appointments' doctor.id %}"> Chose</a></button>
+        <p>------------------------------------</p>
+    {% endfor %}
+    {% else %}
+        <p> There isn't any Doctor </p>
+    {%endif%}
+    </div>
+</div>
+
+{% endblock %}

@@ -31,10 +31,9 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            messages.success(request, "Message sent.")
-            return redirect(reverse("login"))
+            return redirect(reverse("appointment_list"))
         else:
-            render(request, "login.html", {"error": "the username or password is invalid"})
+            return render(request, "login.html", {"error": "the username or password is invalid"})
     else:
         return render(request, "login.html")
 

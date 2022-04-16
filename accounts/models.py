@@ -14,6 +14,9 @@ class User(AbstractUser):
     age = models.PositiveSmallIntegerField(blank=True, null=True)
     email = models.EmailField(blank=False)
 
+    @property
+    def is_doctor(self):
+        return hasattr(self, "doctor")
 
 
 

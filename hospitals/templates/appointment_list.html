@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en" >
 {% load static %}
 <head>
@@ -18,18 +19,22 @@
   </div>
 </div>
 {% endfor %}
-{%block section %}
 <div class="wrapper">
-    <form method="post" class="form-signin">
-      {% csrf_token %}
-      <h2 class="form-signin-heading">Please login</h2>
-      <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />
-      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
-      <p><a href="{% url 'password_reset'%}">reset password</a></p>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-    </form>
-  </div>
-{%endblock%}
+    <div class="form-signin">
+    <h2 class="form-signin-heading">Hello {% if request.user.is_doctor %} Dr. {%endif%} {{request.user.first_name}} {{request.user.last_name}}</h2>
+    {% if appointments %}
+    {% for appointment in appointments %}
+        <p> Doctor : {{appointment.doctor}} ---- Patient : {{appointment.patient}}</p>
+        <p> Date : {{appointment.date}}  ---- Time : {{appointment.time}}</p>
+        ------------------------------------
+    {% endfor %}
+    {% else %}
+        <p> There isn't any appointments</p>
+    {%endif%}
+        <button class="btn btn-lg btn-warning btn-block" type="button"><a href="{% if request.user.is_doctor %} {% url 'appointment_create' %} {% else %} {% url 'doctor_list' %}  {% endif %}"  >   {% if request.user.is_doctor %} create {% else %} book {% endif %} appointment </a></button>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
