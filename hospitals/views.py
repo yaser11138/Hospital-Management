@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from hospitals.models import Doctor, Appointment
 from .forms import AppointmentForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import user_passes_test
 from .decorators import doctor_login_required
+from django.contrib.auth.decorators import login_required
 User = get_user_model()
-
-
 
 
 def doctor_register(request):
@@ -20,12 +19,14 @@ def doctor_register(request):
         return render(request, "doctor.html")
 
 
+@login_required(login_url=reverse_lazy("login"))
 def doctor_list(request):
     doctors = Doctor.objects.all()
     return render(request, "doctor_list.html", {"doctors": doctors})
 
 
 # get the doctor appointments
+@login_required(login_url=reverse_lazy("login"))
 def doctor_appointments(request, doctor_id):
     doctor = Doctor.objects.get(id=doctor_id)
     appointments = Appointment.objects.filter(doctor=doctor)
@@ -34,6 +35,7 @@ def doctor_appointments(request, doctor_id):
 
 
 # get the user appointments
+@login_required(login_url=reverse_lazy("login"))
 def appointment_list(request):
     appointments = Appointment.objects.related_appointment_to_user(user=request.user)
     context = {"appointments": appointments}
@@ -57,6 +59,7 @@ def appointment_create(request):
         return render(request, "appointments_create.html", {"form": appointment_form})
 
 
+@login_required(login_url=reverse_lazy("login"))
 def appointment_book(request, appointment_id):
     appointment = Appointment.objects.get(id=appointment_id)
     appointment.patient = request.user
