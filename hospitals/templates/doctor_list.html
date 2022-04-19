@@ -6,7 +6,7 @@
     {% if doctors %}
     {% for doctor in doctors %}
         <p> {{doctor.user.username}} ____ {{doctor.expertise}}</p>
-         <button class="btn" type="button"><a href="{% url 'doctor_appointments' doctor.id %}"> Chose</a></button>
+         <button class="btn" type="button"><a href="{% url 'doctor_appointments' doctor.id %}"> Select</a></button>
         <p>------------------------------------</p>
     {% endfor %}
     {% else %}

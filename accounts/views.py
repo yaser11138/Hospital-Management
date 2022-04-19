@@ -4,7 +4,6 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -16,7 +15,7 @@ def register(request):
             login(request, user)
             if request.POST.get("type_choices") == 'D':
                 return redirect(reverse("doctor"))
-            return render(request, "login.html")
+            return redirect(reverse("appointment_list"))
         else:
             return render(request, "register.html", {"form": user})
     else:

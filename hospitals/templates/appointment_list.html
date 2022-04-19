@@ -10,15 +10,14 @@
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
+<nav class="navbar">
+  <span class="navbar-brand mb-0 h1">Hospital Mnagement</span>
+  <span class="navbar-text">
+      <a href="{% url 'logout' %}">Log out</a>
+    </span>
 
-{% for message in messages %}
-<div class="container-fluid p-0">
-  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-    {{ message }}
-  </div>
-</div>
-{% endfor %}
+</nav>
+<!-- partial:index.partial.html -->
 <div class="wrapper">
     <div class="form-signin">
     <h2 class="form-signin-heading">Hello {% if request.user.is_doctor %} Dr. {%endif%} {{request.user.first_name}} {{request.user.last_name}}</h2>

@@ -3,9 +3,9 @@
 <div class="wrapper">
     <form method="post" class="form-signin">
       {% csrf_token %}
-      <h2 class="form-signin-heading">Please login</h2>
-        <label for="id_date">Date</label><input type="text" class="form-control" name="date" required="" id="id_date">
-        <label for="id_time">Time</label><input type="text" class="form-control" name="time" required="" id="id_time">
+      <h2 class="form-signin-heading">Create Appointments</h2>
+        <label for="id_date">Date</label><input type="date" class="form-control" name="date"  id="id_date">
+        <label for="id_time">Time</label><input type="time" class="form-control" name="time"  id="id_time">
       <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
 
         {% if errors %}
