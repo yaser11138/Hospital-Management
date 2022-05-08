@@ -26,10 +26,12 @@ class AppointmentManager(models.Manager):
 class Appointment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     patient = models.ForeignKey(user, on_delete=models.SET_NULL, null=True)
-    description = models.TextField(blank=True)
     date = models.DateField()
     time = models.TimeField()
     objects = AppointmentManager()
 
     class Meta:
         unique_together = ["date", "time"]
+
+    def __str__(self):
+        return self.description
