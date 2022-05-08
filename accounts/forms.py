@@ -5,7 +5,7 @@ import re
 user = get_user_model()
 
 
-class UserRegisterion(UserCreationForm):
+class UserRegistration(UserCreationForm):
     TYPES = (
         ("P", "Patient"),
         ("D", "Doctor"),

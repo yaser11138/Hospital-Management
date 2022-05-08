@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from accounts.forms import UserRegisterion
+from accounts.forms import UserRegistration
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
@@ -9,7 +9,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 def register(request):
     if request.method == "POST":
-        user = UserRegisterion(data=request.POST)
+        user = UserRegistration(data=request.POST)
         if user.is_valid():
             user = user.save()
             login(request, user)
@@ -19,7 +19,7 @@ def register(request):
         else:
             return render(request, "register.html", {"form": user})
     else:
-        user = UserRegisterion()
+        user = UserRegistration()
         return render(request, "register.html", {"form": user})
 
 
