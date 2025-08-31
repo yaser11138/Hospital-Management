@@ -14,7 +14,7 @@ def register(request):
             user = user.save()
             login(request, user)
             if request.POST.get("type_choices") == 'D':
-                return redirect(reverse("doctor"))
+                return redirect(reverse("doctor_list"))
             return redirect(reverse("appointment_list"))
         else:
             return render(request, "register.html", {"form": user})
